@@ -36,7 +36,7 @@ def generate_problem_and_answer_futogo():
         if num1 == num2:
             continue
         comparison = compare_numbers(num1, num2)
-        explanation = f"{num1:+.2f} は {num2:+.2f} よりも {'大きい' if comparison == '>' else '小さい'}です。"
+        explanation = f"{num1:+.2f} は {num2:+.2f} よりも{'大きい' if comparison == '>' else '小さい'}です。"
         answer_text += f"({i}) {explanation}よって {num1:+.2f} {comparison} {num2:+.2f} が成立します。\n"
 
     return problem_text + answer_text

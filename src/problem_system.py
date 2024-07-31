@@ -1,6 +1,10 @@
 from .chuichi_seifu import *
 from .chuichi_futogo import generate_problem_and_answer_futogo
 from .chuichi_futogo_multi import *
+from .chuichi_equation import *
+from .chuichi_equation_jijo import *
+from .hoteshiki_ichiji import *
+from .hoteshiki_henkei import *
 
 problem_generator_dict = {
     "seifu": generate_seifu_problem,
@@ -16,5 +20,9 @@ problem_generator_dict = {
     "min_suretsu": generate_smallest_number_problem_and_answer,
     "seisu_range": generate_range_problem_and_answer,
     "seisu_range_futoshiki": generate_inequality_problem_and_answer_futoshiki,
+    "chuichi_equation_dainyu": generate_takoshiki_dainyu_problem,
+    "chuichi_equation_dainyu_jijo": generate_dainyu_problem_jijo,
+    "hoteshiki_ichiji": generate_ichiji_hoteshiki,
+    "hoteshiki_henkei": generate_transformation_problem_niji,
 
 }

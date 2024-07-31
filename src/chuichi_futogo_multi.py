@@ -202,7 +202,7 @@ def generate_inequality_problem_and_answer_futoshiki():
     # 範囲内のすべての整数をリスト化
     integer_list = list(range(lower_int, upper_int + 1))
 
-    problem_text = f"問題:\n不等式 {lower_bound} < x < {upper_bound} を満たすすべての整数xを見つけなさい。"
+    problem_text = f"問題:\n不等式 {lower_bound} < x < {upper_bound} を満たす全ての整数xを見つけなさい。"
     answer_text = f"\n\n解答:\n"
     answer_text += f"はじめに、与えられた範囲を確認します。\n"
     answer_text += f"{lower_bound} より大きい整数は {lower_int} から始まります。\n"
