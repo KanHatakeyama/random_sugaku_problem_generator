@@ -70,12 +70,57 @@ def generate_product_problem_and_answer_seki():
     # 重複を避けるためソートして正規化
     unique_pairs = set(tuple(sorted(pair)) for pair in pairs)
 
+    filtered_pairs = []
+    for pair in unique_pairs:
+        if pair[0]*pair[1] == target_product:
+            filtered_pairs.append(pair)
+    unique_pairs = filtered_pairs
+
     problem_text = f"問題:\n積が {target_product} となる 2 つの整数の組をすべて求めなさい｡ただし，数の並び順は考えないものとします。"
     answer_text = "\n\n解答:\n"
     answer_text += f"積が {target_product} となる整数の組は次の通りです:\n"
     answer_text += ", ".join([f"({a}, {b})" for a, b in unique_pairs]) + "\n"
 
     return problem_text + answer_text
+
+def generate_product_problem_and_answer_seki_count():
+    # 整数の積を求める
+    target_product = random.randint(-50, 50)
+    while target_product == 0:  # 0だと組み合わせが無限になるため避ける
+        target_product = random.randint(-50, 50)
+
+    pairs = set()  # 重複を避けるためセットを使用
+
+    # 1からtarget_productの絶対値の平方根までの範囲でループ
+    for i in range(1, int(abs(target_product) ** 0.5) + 1):
+        if target_product % i == 0:
+            # 商を求める
+            j = target_product // i
+            # i, jおよびその逆のペアをセットに追加
+            pairs.add((i, j))
+            pairs.add((-i, -j))
+            pairs.add((-i, j))
+            pairs.add((i, -j))
+
+    # 重複を避けるためソートして正規化
+    unique_pairs = set(tuple(sorted(pair)) for pair in pairs)
+
+    filtered_pairs = []
+    for pair in unique_pairs:
+        if pair[0]*pair[1] == target_product:
+            filtered_pairs.append(pair)
+    unique_pairs = filtered_pairs
+
+    problem_text = f"問題:\n積が {target_product} となる 2 つの整数の組はいくつあるか?｡ただし，数の並び順は考えないものとする。"
+    answer_text = "\n\n解答:\n"
+    answer_text += f"積が {target_product} となる整数の組は次の通りです:\n"
+    answer_text += ", ".join([f"({a}, {b})" for a, b in unique_pairs]) + "\n"
+    answer_text += f"したがって，積が {target_product} となる整数の組は {len(unique_pairs)} 組です。"
+
+    return problem_text + answer_text
+
+
+
 
 
 def generate_mean_problem_and_answer():

@@ -153,6 +153,45 @@ def generate_smallest_number_problem_and_answer():
 
     return problem_text + answer_text
 
+def generate_count_range_problem_and_answer():
+    lower_bound = round(random.uniform(-10, 10), 1)
+    upper_bound = round(random.uniform(lower_bound, 10), 1)
+
+    while lower_bound == upper_bound:
+        upper_bound = round(random.uniform(lower_bound, 10), 1)
+
+    # lower_bound より大きく、upper_bound より小さい整数を探す
+    lower_int = int(lower_bound) + \
+        1 if lower_bound % 1 != 0 else int(lower_bound) + 1
+    upper_int = int(upper_bound) if upper_bound % 1 != 0 else int(
+        upper_bound) - 1
+    if lower_bound<0:
+        lower_int-=1
+    if upper_bound<0:
+        upper_int-=1
+
+    # 範囲内のすべての整数をリスト化
+    integer_list = list(range(lower_int, upper_int + 1))
+
+    problem_text = f"問題:\n{lower_bound} より大きく，{upper_bound} より小さいすべての整数xはいくつあるか?"
+    answer_text = f"\n\n解答:\n"
+    answer_text += f"はじめに、与えられた範囲を確認します。\n"
+    answer_text += f"{lower_bound} より大きい整数は {lower_int} から始まります。\n"
+    answer_text += f"{upper_bound} より小さい整数は {upper_int} で終わります。\n\n"
+
+    if len(integer_list) == 0:
+        answer_text += f"したがって、{lower_bound} より大きく {upper_bound} より小さい整数xは存在しません。\n"
+        return problem_text + answer_text
+
+    answer_text += f"したがって、{lower_bound} より大きく {upper_bound} より小さいすべての整数xは次の通りです。\n"
+    answer_text += ", ".join(map(str, integer_list)) + "\n"
+
+    answer_text += f"\nよって、{lower_bound} より大きく {upper_bound} より小さい整数xは{len(integer_list)}個存在します。\n"
+
+    return problem_text + answer_text
+
+
+
 
 def generate_range_problem_and_answer():
     lower_bound = round(random.uniform(-10, 10), 1)
@@ -166,6 +205,10 @@ def generate_range_problem_and_answer():
         1 if lower_bound % 1 != 0 else int(lower_bound) + 1
     upper_int = int(upper_bound) if upper_bound % 1 != 0 else int(
         upper_bound) - 1
+    if lower_bound<0:
+        lower_int-=1
+    if upper_bound<0:
+        upper_int-=1
 
     # 範囲内のすべての整数をリスト化
     integer_list = list(range(lower_int, upper_int + 1))
@@ -199,6 +242,12 @@ def generate_inequality_problem_and_answer_futoshiki():
     upper_int = int(upper_bound) if upper_bound % 1 != 0 else int(
         upper_bound) - 1
 
+    if lower_bound<0:
+        lower_int-=1
+    if upper_bound<0:
+        upper_int-=1
+
+
     # 範囲内のすべての整数をリスト化
     integer_list = list(range(lower_int, upper_int + 1))
 
@@ -212,5 +261,42 @@ def generate_inequality_problem_and_answer_futoshiki():
         return problem_text + answer_text
     answer_text += f"したがって、{lower_bound} < x < {upper_bound} を満たすすべての整数xは次の通りです。\n"
     answer_text += ", ".join(map(str, integer_list)) + "\n"
+
+    return problem_text + answer_text
+
+def generate_inequality_problem_and_answer_futoshiki_count():
+    lower_bound = round(random.uniform(-10, 10), 1)
+    upper_bound = round(random.uniform(lower_bound, 10), 1)
+
+    while lower_bound == upper_bound:
+        upper_bound = round(random.uniform(lower_bound, 10), 1)
+
+    # lower_bound より大きく、upper_bound より小さい整数を探す
+    lower_int = int(lower_bound) + \
+        1 if lower_bound % 1 != 0 else int(lower_bound) + 1
+    upper_int = int(upper_bound) if upper_bound % 1 != 0 else int(
+        upper_bound) - 1
+
+    if lower_bound<0:
+        lower_int-=1
+    if upper_bound<0:
+        upper_int-=1
+
+
+    # 範囲内のすべての整数をリスト化
+    integer_list = list(range(lower_int, upper_int + 1))
+
+    problem_text = f"問題:\n不等式 {lower_bound} < x < {upper_bound} を満たす全ての整数xはいくつあるか?"
+    answer_text = f"\n\n解答:\n"
+    answer_text += f"はじめに、与えられた範囲を確認します。\n"
+    answer_text += f"{lower_bound} より大きい整数は {lower_int} から始まります。\n"
+    answer_text += f"{upper_bound} より小さい整数は {upper_int} で終わります。\n\n"
+    if len(integer_list) == 0:
+        answer_text += f"したがって、{lower_bound} より大きく {upper_bound} より小さい整数xは存在しません。\n"
+        return problem_text + answer_text
+    answer_text += f"したがって、{lower_bound} < x < {upper_bound} を満たすすべての整数xは次の通りです。\n"
+    answer_text += ", ".join(map(str, integer_list)) + "\n"
+
+    answer_text += f"\nよって、{lower_bound} < x < {upper_bound} を満たす整数xは{len(integer_list)}個存在します。\n"
 
     return problem_text + answer_text

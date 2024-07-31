@@ -63,7 +63,7 @@ def generate_ichiji_hoteshiki():
         solution_fraction = solution[0].evalf()
         solution_decimal = float(solution_fraction)
         rounded_solution = round(solution_decimal, 2)
-        answer_text += f"最後に、x の解を求めます:\n   x = {solution[0]} ({rounded_solution})"
+        answer_text += f"最後に、x の解を求めます:\n   x = {solution[0]} (= {rounded_solution})"
     else:
         answer_text += "解がありません。"
     return problem_text + answer_text
