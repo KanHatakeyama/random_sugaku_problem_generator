@@ -5,8 +5,13 @@ from .chuichi_equation import *
 from .chuichi_equation_jijo import *
 from .hoteshiki_ichiji import *
 from .hoteshiki_henkei import *
+from .hoteshiki_henkei2 import *
+from .sort_with_cases import *
+from .baisu_hantei import *
+from .shisoku_enzan import *
 
 problem_generator_dict = {
+    "shisoku":generate_arithmetic_problem,
     "seifu": generate_seifu_problem,
     "seisu_seki": generate_product_problem_and_answer_seki,
     "seisu_seki_count":generate_product_problem_and_answer_seki_count,
@@ -27,5 +32,8 @@ problem_generator_dict = {
     "chuichi_equation_dainyu_jijo": generate_dainyu_problem_jijo,
     "hoteshiki_ichiji": generate_ichiji_hoteshiki,
     "hoteshiki_henkei": generate_transformation_problem_niji,
+    "hoteishiki_henkei2":generate_transformation_problem_polynomial,
+    "sort_with_cases":gen_sort_with_cases,
+    "baisu_hantei":generate_baisu_count_problem,
 
 }
