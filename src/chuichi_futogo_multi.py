@@ -158,6 +158,7 @@ def generate_count_range_problem_and_answer():
     upper_bound = round(random.uniform(lower_bound, 10), 1)
 
     while lower_bound == upper_bound:
+        lower_bound = round(random.uniform(-10, 10), 1)
         upper_bound = round(random.uniform(lower_bound, 10), 1)
 
     # lower_bound より大きく、upper_bound より小さい整数を探す
@@ -198,6 +199,7 @@ def generate_range_problem_and_answer():
     upper_bound = round(random.uniform(lower_bound, 10), 1)
 
     while lower_bound == upper_bound:
+        lower_bound = round(random.uniform(-10, 10), 1)
         upper_bound = round(random.uniform(lower_bound, 10), 1)
 
     # lower_bound より大きく、upper_bound より小さい整数を探す
@@ -234,6 +236,7 @@ def generate_inequality_problem_and_answer_futoshiki():
     upper_bound = round(random.uniform(lower_bound, 10), 1)
 
     while lower_bound == upper_bound:
+        lower_bound = round(random.uniform(-10, 10), 1)
         upper_bound = round(random.uniform(lower_bound, 10), 1)
 
     # lower_bound より大きく、upper_bound より小さい整数を探す
@@ -269,6 +272,7 @@ def generate_inequality_problem_and_answer_futoshiki_count():
     upper_bound = round(random.uniform(lower_bound, 10), 1)
 
     while lower_bound == upper_bound:
+        lower_bound = round(random.uniform(-10, 10), 1)
         upper_bound = round(random.uniform(lower_bound, 10), 1)
 
     # lower_bound より大きく、upper_bound より小さい整数を探す
