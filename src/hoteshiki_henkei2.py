@@ -37,7 +37,7 @@ def format_equation(lhs, rhs, solve_for):
 def generate_transformation_problem_polynomial():
     lhs, rhs, coefficients, symbols, solve_for, solution = generate_random_polynomial()
 
-    problem_text = "次の等式を # の中の文字について解きなさい。\n"
+    problem_text = ""
     problem_text += format_equation(lhs, rhs, solve_for)
 
     # 解答の詳細

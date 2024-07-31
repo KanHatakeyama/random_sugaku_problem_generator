@@ -85,9 +85,9 @@ def generate_product_problem_and_answer_seki():
 
 def generate_product_problem_and_answer_seki_count():
     # 整数の積を求める
-    target_product = random.randint(-50, 50)
+    target_product = random.randint(-100, 100)
     while target_product == 0:  # 0だと組み合わせが無限になるため避ける
-        target_product = random.randint(-50, 50)
+        target_product = random.randint(-100, 100)
 
     pairs = set()  # 重複を避けるためセットを使用
 
