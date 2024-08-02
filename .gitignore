@@ -160,3 +160,4 @@ cython_debug/
 #.idea/
 
 out_random
+out_table

@@ -4,6 +4,12 @@ import numpy as np
 import random
 import string
 import re
+from tqdm import tqdm
+import json
+import datetime
+import os
+import time
+
 # ランダムなラベル名を生成する関数
 def random_label():
     return ''.join(random.choices(string.ascii_uppercase, k=5))
@@ -215,4 +221,18 @@ def gen():
 
     return text.strip()
 
-print(gen())
+save_dir="out_table"
+n_records=100
+if not os.path.exists(save_dir):
+    os.makedirs(save_dir)
+
+# ファイル名を現在の日付と時刻から生成
+filename = datetime.datetime.now().strftime("%Y%m%d_%H%M%S") + ".jsonl"
+filepath = os.path.join(save_dir, filename)
+
+with open(filepath, 'a', encoding='utf-8') as f:
+    for _ in tqdm(range(n_records), desc="Generating problems"):
+        d = {"text": gen().strip()}
+        json.dump(d, f, ensure_ascii=False)
+        f.write("\n")
+
