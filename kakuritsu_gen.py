@@ -1,6 +1,11 @@
 # %%
+from tqdm import tqdm
+import datetime
+import json
+import os
 import itertools
 import random
+
 
 def generate_coin_problem_and_solution(num_coins, num_heads):
     num_tails = num_coins - num_heads
@@ -8,10 +13,12 @@ def generate_coin_problem_and_solution(num_coins, num_heads):
     total_outcomes = 2 ** num_coins
     all_outcomes = list(itertools.product('HT', repeat=num_coins))
     random.shuffle(all_outcomes)
-    favorable_outcomes_list = [outcome for outcome in all_outcomes if outcome.count('H') == num_heads]
+    favorable_outcomes_list = [
+        outcome for outcome in all_outcomes if outcome.count('H') == num_heads]
     favorable_outcomes = len(favorable_outcomes_list)
     probability = favorable_outcomes / total_outcomes
-    favorable_outcomes_str = ', '.join(''.join(outcome) for outcome in favorable_outcomes_list)
+    favorable_outcomes_str = ', '.join(
+        ''.join(outcome) for outcome in favorable_outcomes_list)
 
     steps = [
         f"1. コインを{num_coins}枚投げる全ての可能な結果の数を求めます。各コインには表(H)か裏(T)の2通りの結果があるので、全体の結果は 2^{num_coins} = {total_outcomes} 通りです。",
@@ -25,6 +32,7 @@ def generate_coin_problem_and_solution(num_coins, num_heads):
     solution = "\n".join(steps)
     return problem_statement, solution
 
+
 def generate_bead_problem_and_solution(num_beads, num_red):
     # Define possible colors and objects
     colors = [
@@ -37,7 +45,6 @@ def generate_bead_problem_and_solution(num_beads, num_red):
         '葉っぱ', '花', 'ペン', '鍵', '時計', 'ネックレス', '靴', 'ハンカチ', '本', 'メガネ'
     ]
 
-
     # Randomly choose a color and an object
     color1, color2 = random.sample(colors, 2)
     object = random.choice(objects)
@@ -47,10 +54,12 @@ def generate_bead_problem_and_solution(num_beads, num_red):
     total_outcomes = 2 ** num_beads
     all_outcomes = list(itertools.product('01', repeat=num_beads))
     random.shuffle(all_outcomes)
-    favorable_outcomes_list = [outcome for outcome in all_outcomes if outcome.count('0') == num_red]
+    favorable_outcomes_list = [
+        outcome for outcome in all_outcomes if outcome.count('0') == num_red]
     favorable_outcomes = len(favorable_outcomes_list)
     probability = favorable_outcomes / total_outcomes
-    favorable_outcomes_str = ', '.join(''.join(outcome) for outcome in favorable_outcomes_list)
+    favorable_outcomes_str = ', '.join(
+        ''.join(outcome) for outcome in favorable_outcomes_list)
 
     steps = [
         f"1. {num_beads}個の{object}を取り出す全ての可能な結果の数を求めます。各{object}は{color1}(0)か{color2}(1)の2通りの結果があるので、全体の結果は 2^{num_beads} = {total_outcomes} 通りです。",
@@ -64,9 +73,10 @@ def generate_bead_problem_and_solution(num_beads, num_red):
     solution = "\n".join(steps)
     return problem_statement, solution
 
+
 def generate_dice_problem_and_solution(num_dice, target_sum,):
-    problem_type = random.choice(["equal", "greater_than_or_equal", "less_than_or_equal", 
-                                  #"odd_sum", "even_sum", 
+    problem_type = random.choice(["equal", "greater_than_or_equal", "less_than_or_equal",
+                                  # "odd_sum", "even_sum",
                                   "difference"])
 
     if problem_type == "equal":
@@ -80,30 +90,37 @@ def generate_dice_problem_and_solution(num_dice, target_sum,):
     elif problem_type == "even_sum":
         problem_statement = f"{num_dice}個のサイコロを振った時、出た目の合計が偶数になる確率を求めよ。"
     else:  # difference
-        diff= random.randint(0, num_dice*6)
+        diff = random.randint(0, num_dice*6)
         problem_statement = f"{num_dice}個のサイコロを振った時、出た目の最大値と最小値の差が{diff}になる確率を求めよ。"
-    
+
     total_outcomes = 6 ** num_dice
     all_outcomes = list(itertools.product(range(1, 7), repeat=num_dice))
     random.shuffle(all_outcomes)
-    
+
     if problem_type == "equal":
-        favorable_outcomes_list = [outcome for outcome in all_outcomes if sum(outcome) == target_sum]
+        favorable_outcomes_list = [
+            outcome for outcome in all_outcomes if sum(outcome) == target_sum]
     elif problem_type == "greater_than_or_equal":
-        favorable_outcomes_list = [outcome for outcome in all_outcomes if sum(outcome) >= target_sum]
+        favorable_outcomes_list = [
+            outcome for outcome in all_outcomes if sum(outcome) >= target_sum]
     elif problem_type == "less_than_or_equal":
-        favorable_outcomes_list = [outcome for outcome in all_outcomes if sum(outcome) <= target_sum]
+        favorable_outcomes_list = [
+            outcome for outcome in all_outcomes if sum(outcome) <= target_sum]
     elif problem_type == "odd_sum":
-        favorable_outcomes_list = [outcome for outcome in all_outcomes if sum(outcome) % 2 != 0]
+        favorable_outcomes_list = [
+            outcome for outcome in all_outcomes if sum(outcome) % 2 != 0]
     elif problem_type == "even_sum":
-        favorable_outcomes_list = [outcome for outcome in all_outcomes if sum(outcome) % 2 == 0]
+        favorable_outcomes_list = [
+            outcome for outcome in all_outcomes if sum(outcome) % 2 == 0]
     else:  # difference
-        favorable_outcomes_list = [outcome for outcome in all_outcomes if max(outcome) - min(outcome) == diff]
-    
+        favorable_outcomes_list = [
+            outcome for outcome in all_outcomes if max(outcome) - min(outcome) == diff]
+
     favorable_outcomes = len(favorable_outcomes_list)
     probability = favorable_outcomes / total_outcomes
-    favorable_outcomes_str = ', '.join(str(outcome) for outcome in favorable_outcomes_list)
-    
+    favorable_outcomes_str = ', '.join(
+        str(outcome) for outcome in favorable_outcomes_list)
+
     if problem_type == "equal":
         description = f"出た目の合計が{target_sum}になる"
     elif problem_type == "greater_than_or_equal":
@@ -116,7 +133,7 @@ def generate_dice_problem_and_solution(num_dice, target_sum,):
         description = "出た目の合計が偶数になる"
     else:  # difference
         description = f"出た目の最大値と最小値の差が{diff}になる"
-    
+
     steps = [
         f"1. {num_dice}個のサイコロを振る全ての可能な結果の数を求めます。各サイコロには1から6までの6通りの結果があるので、全体の結果は 6^{num_dice} = {total_outcomes} 通りです。",
         f"2. 次に、{description}結果の数を数えます。",
@@ -132,7 +149,8 @@ def generate_dice_problem_and_solution(num_dice, target_sum,):
 
 # Function to randomly choose a problem type and generate the problem and solution
 def generate_random_problem_and_solution():
-    problem_types = [generate_coin_problem_and_solution, generate_bead_problem_and_solution, generate_dice_problem_and_solution]
+    problem_types = [generate_coin_problem_and_solution,
+                     generate_bead_problem_and_solution, generate_dice_problem_and_solution]
     chosen_problem_type = random.choice(problem_types)
 
     if chosen_problem_type == generate_coin_problem_and_solution:
@@ -150,22 +168,20 @@ def generate_random_problem_and_solution():
 
 # Example of generating multiple random problems and solutions
 
+
 def gen():
-    text=""
-    questions, answers =generate_random_problem_and_solution()
-    text+="問題: "+(questions)+"\n"
-    text+="回答: "+(answers)+"\n\n"
+    text = ""
+    questions, answers = generate_random_problem_and_solution()
+    text += "問題: "+(questions)+"\n"
+    text += "回答: "+(answers)+"\n\n"
 
     return text.strip()
 
-# %%
-import os
-import json
-import datetime
-from tqdm import tqdm
 
-save_dir="out_kakuritsu"
-n_records=10**6
+# %%
+
+save_dir = "out_kakuritsu"
+n_records = 10**2
 if not os.path.exists(save_dir):
     os.makedirs(save_dir)
 
@@ -173,19 +189,14 @@ if not os.path.exists(save_dir):
 filename = datetime.datetime.now().strftime("%Y%m%d_%H%M%S") + ".jsonl"
 filepath = os.path.join(save_dir, filename)
 
-problem_list=[gen() for _ in tqdm(range(n_records))]
-problem_list=list(set(problem_list))
+problem_list = [gen() for _ in tqdm(range(n_records))]
+problem_list = list(set(problem_list))
 
 with open(filepath, 'a', encoding='utf-8') as f:
-    for _ in tqdm(problem_list):
-        d = {"text": gen().strip()}
+    for d in tqdm(problem_list):
+        d = {"text": d}
         json.dump(d, f, ensure_ascii=False)
         f.write("\n")
 
 
-
-
 # %%
-
-
-
